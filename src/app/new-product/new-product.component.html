@@ -1,0 +1,35 @@
+<div class="container py-5">
+    <div class="col-md-6 offset-3">
+        <div class="card">
+            <div class="card-header">Add New Product : </div>
+            <div class="card-body">
+                <div class="text-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+                <!-- {{ newProductForm.value | json }} -->
+                <form [formGroup]="newProductForm" (ngSubmit)="handleAddProduct()" class="mt-2">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Name : </label>
+                        <input type="text" class="form-control" formControlName="name">
+                        <span class="text-danger mt-2" 
+                            *ngIf="newProductForm.controls['name'].errors && newProductForm.controls['name'].touched">
+                            {{productService.getErrorMessage("Name",newProductForm.controls['name'].errors)}}
+                            {{newProductForm.controls['name'].errors | json}}
+                        </span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Price : </label>
+                        <input type="text" class="form-control" formControlName="price">
+                        <span class="text-danger mt-2" 
+                            *ngIf="newProductForm.controls['price'].errors && newProductForm.controls['price'].touched">
+                            {{productService.getErrorMessage("Price",newProductForm.controls['price'].errors)}}
+                        </span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="check" class="form-label me-2">Promotion : </label>
+                        <input type="checkbox" id="check" class="form-check-input" formControlName="promotion">
+                    </div>
+                    <button type="submit" class="btn btn-primary" [disabled]="!newProductForm.valid">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

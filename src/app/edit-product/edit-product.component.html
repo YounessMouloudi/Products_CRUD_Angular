@@ -1,0 +1,38 @@
+<div class="container py-5">
+    <div class="col-md-6 offset-3">
+        <div class="card">
+            <div class="card-header">Edit New Product : </div>
+            <div class="card-body">
+                <div class="text-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+                <!-- {{ editProductForm.value | json }} -->
+                <form [formGroup]="editProductForm" (ngSubmit)="handleUpdateProduct()" class="mt-2">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Id : {{product.id}}</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Name : </label>
+                        <input type="text" class="form-control" formControlName="name">
+                        <span class="text-danger mt-2" 
+                            *ngIf="editProductForm.controls['name'].errors && editProductForm.controls['name'].touched">
+                            {{productService.getErrorMessage("Name",editProductForm.controls['name'].errors)}}
+                            {{editProductForm.controls['name'].errors | json}}
+                        </span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Price : </label>
+                        <input type="text" class="form-control" formControlName="price">
+                        <span class="text-danger mt-2" 
+                            *ngIf="editProductForm.controls['price'].errors && editProductForm.controls['price'].touched">
+                            {{productService.getErrorMessage("Price",editProductForm.controls['price'].errors)}}
+                        </span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="check" class="form-label me-2">Promotion : </label>
+                        <input type="checkbox" id="check" class="form-check-input" formControlName="promotion">
+                    </div>
+                    <button type="submit" class="btn btn-primary" [disabled]="!editProductForm.valid">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
